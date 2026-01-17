@@ -24,13 +24,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     cmake \
     libeigen3-dev \
     libssl-dev \
+    nlohmann-json3-dev \
     python3 \
     python3-pip \
     libpoco-dev \
     && rm -rf /var/lib/apt/lists/*
-
-# Install nlohmann/json header
-RUN wget https://github.com/nlohmann/json/releases/download/v3.11.2/json.hpp -O /usr/local/include/nlohmann/json.hpp
 
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
