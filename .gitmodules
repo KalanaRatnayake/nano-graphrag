@@ -1,0 +1,3 @@
+[submodule "external/nano-vectordb-cpp"]
+	path = external/nano-vectordb-cpp
+	url = https://github.com/KalanaRatnayake/nano-vectordb-cpp

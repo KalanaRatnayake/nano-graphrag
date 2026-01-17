@@ -1,0 +1,20 @@
+{
+  "name": "Nano-VectorDB humble base",
+  "dockerFile": "Dockerfile",
+  "remoteUser": "ubuntu",
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}"
+  },
+  "runArgs": [
+    "--privileged",
+    "--network=host",
+    "--gpus",
+    "all"
+  ],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/ubuntu/${localWorkspaceFolderBasename},type=bind",
+  "workspaceFolder": "/home/ubuntu/${localWorkspaceFolderBasename}",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/ubuntu/.bash_history,type=bind",
+    "source=${localWorkspaceFolder}/.vscode,target=/home/ubuntu/${localWorkspaceFolderBasename}/.vscode,type=bind"
+  ]
+}
