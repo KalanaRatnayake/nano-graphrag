@@ -35,11 +35,12 @@ int main(int argc, char** argv)
   GraphRAG rag("./nano_cache");
 
   // Strategies
-  std::unique_ptr<IEmbeddingStrategy> emb_up;
-  if (api_key)
-    emb_up = create_embedding_strategy(EmbeddingStrategyType::OpenAI);
-  else
-    emb_up = create_embedding_strategy(EmbeddingStrategyType::Hash);
+  if (!api_key)
+  {
+    std::cerr << "ERROR: OPENAI_API_KEY not set. Please provide a valid API key for semantic retrieval." << std::endl;
+    return 1;
+  }
+  std::unique_ptr<IEmbeddingStrategy> emb_up = create_embedding_strategy(EmbeddingStrategyType::OpenAI);
   std::shared_ptr<IEmbeddingStrategy> emb(std::move(emb_up));
   rag.set_embedding_strategy(emb);
 
@@ -83,34 +84,37 @@ int main(int argc, char** argv)
   auto end_index = std::chrono::steady_clock::now();
 
   // Query
-  QueryParam qp;
-  qp.mode = "naive";
-  qp.top_k = 5;
-  qp.response_type = "Multiple Paragraphs";
-  qp.naive_max_token_for_text_unit = 4096;
-  if (!api_key)
-  {
-    // Offline mode: measure indexing and retrieve context only
-    qp.only_need_context = true;
-  }
 
   std::string question = "What are the top themes in this story?";
-  auto start_query = std::chrono::steady_clock::now();
-  auto answer = rag.query(question, qp);
-  auto end_query = std::chrono::steady_clock::now();
-
   auto end_total = std::chrono::steady_clock::now();
-
   auto dur_index = std::chrono::duration_cast<std::chrono::milliseconds>(end_index - start_index).count();
-  auto dur_query = std::chrono::duration_cast<std::chrono::milliseconds>(end_query - start_query).count();
-  auto dur_total = std::chrono::duration_cast<std::chrono::milliseconds>(end_total - start_total).count();
-
   std::cout << "Index time (ms): " << dur_index << "\n";
-  std::cout << "Query time (ms): " << dur_query << "\n";
-  std::cout << "Total time (ms): " << dur_total << "\n\n";
 
-  std::cout << "Question:\n" << question << "\n\n";
-  std::cout << "Answer:\n" << answer << std::endl;
+  // Test all 3 modes
+  const char* modes[] = { "naive", "local", "global" };
+  for (const char* mode : modes)
+  {
+    QueryParam qp;
+    qp.mode = mode;
+    qp.top_k = 5;
+    qp.response_type = "Multiple Paragraphs";
+    qp.naive_max_token_for_text_unit = 4096;
+    if (!api_key)
+      qp.only_need_context = true;
+    std::cout << "\n==== Query mode: " << mode << " ====" << std::endl;
+    auto start_query = std::chrono::steady_clock::now();
+    auto answer = rag.query(question, qp);
+    auto end_query = std::chrono::steady_clock::now();
+    auto dur_query = std::chrono::duration_cast<std::chrono::milliseconds>(end_query - start_query).count();
+    std::cout << "Query time (ms): " << dur_query << "\n";
+    std::cout << "Question:\n" << question << "\n\n";
+    std::cout << "Answer:\n" << answer << std::endl;
+  }
+
+  auto dur_total =
+      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_total)
+          .count();
+  std::cout << "\nTotal time (ms): " << dur_total << "\n";
 
   return 0;
 }

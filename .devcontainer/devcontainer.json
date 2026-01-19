@@ -9,7 +9,9 @@
     "--privileged",
     "--network=host",
     "--gpus",
-    "all"
+    "all",
+    "--env-file",
+    ".devcontainer/devcontainer.env"
   ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/ubuntu/${localWorkspaceFolderBasename},type=bind",
   "workspaceFolder": "/home/ubuntu/${localWorkspaceFolderBasename}",

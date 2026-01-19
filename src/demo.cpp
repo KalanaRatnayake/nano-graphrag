@@ -15,13 +15,14 @@ int main(int argc, char** argv)
   const char* api_key = std::getenv("OPENAI_API_KEY");
 
   // Setup strategies
-  std::unique_ptr<nano_graphrag::IEmbeddingStrategy> emb_up;
-  if (api_key)
-    emb_up = nano_graphrag::create_embedding_strategy(nano_graphrag::EmbeddingStrategyType::OpenAI);
-  else
-    emb_up = nano_graphrag::create_embedding_strategy(nano_graphrag::EmbeddingStrategyType::Hash);
-  std::shared_ptr<nano_graphrag::IEmbeddingStrategy> emb(std::move(emb_up));
-  rag.set_embedding_strategy(emb);
+    if (!api_key)
+    {
+      std::cerr << "ERROR: OPENAI_API_KEY not set. Please provide a valid API key for semantic retrieval." << std::endl;
+      return 1;
+    }
+    std::unique_ptr<nano_graphrag::IEmbeddingStrategy> emb_up = nano_graphrag::create_embedding_strategy(nano_graphrag::EmbeddingStrategyType::OpenAI);
+    std::shared_ptr<nano_graphrag::IEmbeddingStrategy> emb(std::move(emb_up));
+    rag.set_embedding_strategy(emb);
 
   // LLM strategy is optional for context-only mode. If API key is present, set it up.
   {

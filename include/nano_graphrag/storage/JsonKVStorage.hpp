@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <fstream>
+#include <nlohmann/json.hpp>
 
 #include "nano_graphrag/storage/base.hpp"
 
@@ -28,6 +30,9 @@ public:
   {
     this->namespace_name = ns;
     this->global_config = cfg;
+    std::string dir = cfg.count("working_dir") ? cfg.at("working_dir") : std::string("./nano_cache");
+    storage_file_ = dir + "/" + ns + ".json";
+    load();
   }
 
   /**
@@ -84,6 +89,7 @@ public:
   {
     for (auto& kv : data)
       data_[kv.first] = kv.second;
+    save();
   }
 
   /**
@@ -92,10 +98,59 @@ public:
   void drop() override
   {
     data_.clear();
+    save();
   }
 
 private:
   Map data_{};
+  std::string storage_file_;
+
+  void save()
+  {
+    nlohmann::json j;
+    for (const auto& kv : data_)
+    {
+      j[kv.first] = to_json(kv.second);
+    }
+    std::ofstream f(storage_file_);
+    if (f.is_open())
+      f << j.dump(2);
+  }
+
+  void load()
+  {
+    std::ifstream f(storage_file_);
+    if (!f.is_open())
+      return;
+    nlohmann::json j;
+    try
+    {
+      f >> j;
+      for (auto it = j.begin(); it != j.end(); ++it)
+      {
+        data_[it.key()] = from_json(it.value());
+      }
+    }
+    catch (...)
+    {
+      // ignore errors
+    }
+  }
+
+  // Default to_json/from_json for types that are themselves serializable
+  template <typename U = T>
+  static nlohmann::json to_json(const U& value)
+  {
+    nlohmann::json j;
+    j["value"] = value;
+    return j;
+  }
+
+  template <typename U = T>
+  static U from_json(const nlohmann::json& j)
+  {
+    return j.at("value").get<U>();
+  }
 };
 
 }  // namespace nano_graphrag

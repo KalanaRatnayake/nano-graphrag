@@ -28,7 +28,7 @@ inline std::unique_ptr<ILLMStrategy> create_llm_strategy(LLMStrategyType type)
   switch (type)
   {
     case LLMStrategyType::OpenAI:
-      return std::make_unique<OpenAILLMStrategy>();
+      return std::make_unique<OpenAILLMStrategy>("gpt-5.1");
     // Add more cases here
     default:
       return nullptr;

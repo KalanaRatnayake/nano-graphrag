@@ -81,6 +81,45 @@ In summary, "A Christmas Carol" is rich with themes that explore personal transf
 Feel free to ask if you need more detailed information on any specific aspect of these themes!
 ```
 
+### `nano-graphrag-cpp`
+
+Question:
+What are the top themes in this story?
+
+Answer:
+From the passages you’ve given (from *A Christmas Carol*), these are the main themes that clearly emerge:
+
+1. **The Corrupting Power of Greed and “Gain”**  
+   - Belle tells young Scrooge that he has “another Hope as its great end” and that he now “weigh[s] everything by Gain.”  
+   - Her speech makes clear that his love of money has displaced his love for people, and that his whole nature and “atmosphere of life” have changed.  
+   - Marley’s Ghost, bound in chains of cash-boxes and safes, and the other phantoms in chains outside the window, embody the idea that a life devoted to wealth and self-interest leads to a terrible spiritual fate.
+
+2. **Lost Love and the Cost of Wrong Priorities**  
+   - The break between Scrooge and Belle shows how prioritizing wealth over human connection destroys relationships.  
+   - Later, the scene of Belle as a happy wife and mother, contrasted with Scrooge’s lonely existence, underlines the emotional cost of his choices: he could have had “such another creature” calling him father, “a spring-time in the haggard winter” of his life.  
+   - Scrooge’s cry to the Spirit to “remove me from this place” shows his pain at recognizing what he has lost.
+
+3. **Regret, Penance, and the Desire to Interfere for Good**  
+   - Marley speaks of his situation as “no light part of my penance,” and the ghosts outside “sought to interfere, for good, in human matters, and had lost the power for ever.”  
+   - This suggests that after a selfish life, the soul is tormented by regret and a frustrated longing to help others.  
+   - The theme here is that opportunities for goodness are bound to mortal life; once missed, they cannot be reclaimed.
+
+4. **Redemption Through Self-Knowledge and Supernatural Intervention**  
+   - Marley tells Scrooge he has “yet a chance and hope of escaping my fate,” but only if he submits to the visits of the Three Spirits.  
+   - The first Spirit forces Scrooge to see his past and what he has become; Scrooge’s anguish—trying to blot out the Spirit’s light with the extinguisher-cap—shows how painful but necessary self-knowledge is.  
+   - The haunting itself is a process of moral education and possible redemption.
+
+5. **The Value of Family, Warmth, and Everyday Joy**  
+   - Belle’s home scene—children everywhere, noise, laughter, excitement over “Christmas toys and presents”—is full of warmth and mutual affection.  
+   - The casual, tender conversation between Belle and her husband, their amused talk of “Mr. Scrooge,” and their shared concern that he is “quite alone in the world,” contrasts sharply with Scrooge’s solitary, cold life.  
+   - This underlines the theme that true happiness lies in love, family, and simple shared pleasures, not in solitary accumulation.
+
+6. **Time: Past Choices and Their Consequences**  
+   - The structure of these episodes—Scrooge seeing his former self, his lost engagement, and then the later life Belle has without him—highlights how past decisions echo through time.  
+   - Marley’s schedule of visitations (“Expect the first to-morrow when the bell tolls One…”) and the midnight tolling emphasize time as a moral framework: there are appointed moments to change, and those moments will not last forever.
+
+All together, these passages particularly stress how greed displaces love, how that leads to loss and isolation, and how facing the truth about one’s past—painful as it is—offers a last chance at moral and emotional redemption.
+
 
 
 ## Global Search Results
@@ -148,3 +187,85 @@ Closely tied to Scrooge’s transformation is the theme of memory and the past. 
 These themes collectively create a rich and multifaceted narrative that conveys powerful messages about personal growth, the impact of community, the value of generosity, and the critique of social inequities. The journey of Ebenezer Scrooge serves as a timeless reminder of the potential for change and the importance of compassion and empathy in society.
 ```
 
+### `nano-graghrag-cpp`
+
+Question:
+What are the top themes in this story?
+
+Answer:
+From the passage you’ve provided (from Dickens’s *A Christmas Carol*), the main themes that stand out are:
+
+1. **The Corrupting Power of Wealth and “Gain”**  
+   - Belle tells Scrooge that he has changed: where once they were both poor and content, he now “weigh[s] everything by Gain.”  
+   - His pursuit of money has become his “one guiding principle,” strong enough to replace love as the main focus of his life.  
+   - The implied idea is that an obsession with wealth corrodes human relationships and moral character.
+
+2. **Change and Loss of the Self**  
+   - Belle insists he is no longer the man he was when they made their contract: “When it was made you were another man.”  
+   - Scrooge tries to brush this away by calling himself a “boy” then, but her point is moral and emotional, not just about age.  
+   - The theme here is that people can gradually change in ways they don’t fully see, and in doing so they can lose the better parts of themselves.
+
+3. **The Cost of Sacrificing Love for Ambition**  
+   - Belle believes that if he met her now, as a “dowerless girl,” he would never choose her, or he would regret it if he did.  
+   - She “releases” him from their engagement precisely because she knows his heart now belongs to ambition, not to her.  
+   - Later, Scrooge is forced to witness Belle as a happy wife and mother, surrounded by noisy, loving children, highlighting what he forfeited.
+
+4. **Memory, Regret, and Emotional Torture**  
+   - Scrooge begs the Spirit to “show me no more!” because revisiting this memory is agonizing.  
+   - The Ghost nevertheless compels him to watch Belle’s later, happier life, intensifying his sense of loss.  
+   - The theme is that facing one’s past choices honestly can be deeply painful, but is necessary for moral awakening.
+
+5. **True Happiness vs. “Worldly Fortune”**  
+   - The contrast between the two scenes is sharp:  
+     - Scene 1: a painful, quiet breaking of an engagement over money and values.  
+     - Scene 2: a modest but warm, chaotic, joy-filled home full of children and affection.  
+   - Belle has little in terms of wealth, but clearly has emotional richness and contentment.  
+   - The theme is that true happiness lies more in love, family, and human connection than in material success.
+
+6. **The Irreversibility of Certain Choices**  
+   - Belle doesn’t scream or accuse; she calmly accepts reality and lets him go, saying she releases him “with a full heart, for the love of him you once were.”  
+   - Once released, that particular life path (marrying Belle, having that family) is gone. The later scene with her family shows a version of life that Scrooge cannot reclaim.  
+   - This underscores how some decisions, once taken over time, close off entire futures.
+
+All of these themes work together to show how Scrooge’s devotion to money has reshaped his character, destroyed a loving relationship, and left him with a deep, if delayed, sense of regret when confronted with what might have been.
+
+
+## Naive Search Results
+
+Question:
+What are the top themes in this story?
+
+Answer:
+From the passages you’ve provided (all from Charles Dickens’s *A Christmas Carol*), these are the central themes that stand out most clearly:
+
+1. **The Corrupting Power of Greed and “Gain”**  
+   - Belle’s speech to young Scrooge centers on how his character has changed under the influence of money and ambition.  
+   - She points out that he now “weigh[s] everything by Gain” and that he would not choose “a dowerless girl” if he were free now.  
+   - The text shows that focusing solely on wealth can hollow out love, priorities, and one’s humanity.
+
+2. **Loss, Regret, and the Pain of Self-Recognition**  
+   - When Scrooge is forced to watch Belle release him from their engagement, and later to see her happy family life, he experiences deep anguish at what he has lost.  
+   - His plea—“Spirit! … remove me from this place. I cannot bear it!”—shows how painful it is to face the consequences of his choices.  
+   - The phantoms outside the window, condemned to wander and “lost the power for ever” to do good, embody the torment of realizing too late what one should have done in life.
+
+3. **Love, Family, and Human Connection as True Riches**  
+   - Belle’s home, bustling with children, warmth, and laughter, contrasts sharply with Scrooge’s solitary existence.  
+   - Her husband’s casual remark that Scrooge sits “alone. Quite alone in the world” underlines that real wealth lies in love, companionship, and shared joy, not money.  
+   - The joyful chaos of the children, the excitement over simple Christmas toys, and the affectionate welcome of the father all symbolize a life rich in human connection.
+
+4. **Memory, Time, and the Possibility of Change**  
+   - The Ghost of Christmas Past shows Scrooge “shadows of the things that have been,” forcing him to confront who he once was and what he has become.  
+   - The narrative emphasizes that facing one’s past honestly is a key step toward moral and emotional transformation.  
+   - Marley's warning and the schedule of “Three Spirits” (past, present, future) structure the story as a journey through time designed to offer Scrooge “a chance and hope of escaping” Marley’s fate.
+
+5. **Penance, Consequences, and Moral Responsibility**  
+   - Marley’s Ghost, bound in chains, explains that his torment is a result of how he lived his life and that these visitations are Scrooge’s last opportunity to avoid the same destiny.  
+   - The other spirits in the air, all chained and desperate to help the living but unable to, represent the ongoing consequences of selfishness and neglect of others.  
+   - The story insists that how one treats others—especially the poor and vulnerable—has lasting moral consequences that cannot simply be undone after death.
+
+6. **Isolation vs. Community**  
+   - Scrooge’s locked, dark house and his habit of sitting alone contrast with Belle’s lively, open, communal household.  
+   - The scenes hammer home that isolation is both a result and a reinforcement of selfishness, while community is tied to generosity, affection, and joy.  
+   - The line “His partner lies upon the point of death … and there he sat alone” links his emotional isolation to the moral and social poverty of his life.
+
+In the broader work *A Christmas Carol*, these themes come together to show that a life devoted to money and self-interest leads to loneliness, regret, and spiritual bondage, while love, generosity, and connection to others offer true happiness and redemption.

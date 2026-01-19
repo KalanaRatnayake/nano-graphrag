@@ -1,0 +1,46 @@
+name: test-cpp
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.ipynb'
+      - 'examples/**'
+  pull_request:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.ipynb'
+      - 'examples/**'
+
+jobs:
+  test:
+    name: Build & Test on ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ cmake libeigen3-dev libssl-dev nlohmann-json3-dev libpoco-dev libsqlite3-dev
+      - name: Build
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+          cmake --build .
+      - name: Run demo
+        run: |
+          ./build/demo
+      - name: Run benchmark
+        run: |
+          ./build/test_christmas_carol

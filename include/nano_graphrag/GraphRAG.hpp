@@ -161,14 +161,16 @@ public:
   std::string query(const std::string& q, const QueryParam& param = QueryParam{})
   {
     if (param.mode == "naive")
-    {
       return naive_query(q, param);
-    }
-    // local/global not implemented fully
+    if (param.mode == "local")
+      return local_query(q, param);
+    if (param.mode == "global")
+      return global_query(q, param);
     return std::string{ "Sorry, I'm not able to provide an answer to that question." };
   }
 
 private:
+  // Naive: top-k chunks, no doc restriction
   std::string naive_query(const std::string& q, const QueryParam& param)
   {
     debug_log("[GraphRAG] naive_query top_k=", param.top_k,
@@ -205,6 +207,109 @@ private:
     if (!llm_strategy)
       return section;
     debug_log("[GraphRAG] calling LLM");
+    auto resp = llm_strategy->prompt(q, sys_prompt);
+    return resp.empty() ? section : resp;
+  }
+
+  // Local: restrict to chunks from the most relevant doc
+  std::string local_query(const std::string& q, const QueryParam& param)
+  {
+    debug_log("[GraphRAG] local_query top_k=", param.top_k);
+    if (!chunks_vdb)
+      return "Sorry, I'm not able to provide an answer to that question.";
+    auto results = chunks_vdb->query(q, param.top_k * 2); // get more for filtering
+    if (results.empty())
+      return "Sorry, I'm not able to provide an answer to that question.";
+    // Find the most common doc prefix (doc-xxxxxx)
+    std::unordered_map<std::string, int> doc_counts;
+    for (const auto& r : results) {
+      std::string id = r.at("id");
+      auto dash = id.find('-');
+      if (dash != std::string::npos)
+        doc_counts[id.substr(0, dash+1)]++;
+    }
+    std::string best_doc_prefix;
+    int max_count = 0;
+    for (const auto& kv : doc_counts) {
+      if (kv.second > max_count) {
+        max_count = kv.second;
+        best_doc_prefix = kv.first;
+      }
+    }
+    // Filter to chunks from that doc
+    std::vector<std::string> ids;
+    for (const auto& r : results) {
+      std::string id = r.at("id");
+      if (!best_doc_prefix.empty() && id.find(best_doc_prefix) == 0)
+        ids.push_back(id);
+      if ((int)ids.size() >= param.top_k)
+        break;
+    }
+    auto chunks = text_chunks->get_by_ids(ids);
+    std::string section;
+    int tokens = 0;
+    for (const auto& optChunk : chunks) {
+      if (!optChunk.has_value()) continue;
+      const auto& c = optChunk.value();
+      tokens += c.tokens;
+      if (tokens > param.naive_max_token_for_text_unit) break;
+      section += c.content + "\n--New Chunk--\n";
+    }
+    if (!section.empty())
+      section.erase(section.size() - std::string("\n--New Chunk--\n").size());
+    debug_log("[GraphRAG] local context tokens=", tokens);
+    if (param.only_need_context)
+      return section;
+    auto sys_prompt = Prompts::naive_rag_response(section, param.response_type);
+    if (!llm_strategy)
+      return section;
+    debug_log("[GraphRAG] calling LLM (local)");
+    auto resp = llm_strategy->prompt(q, sys_prompt);
+    return resp.empty() ? section : resp;
+  }
+
+  // Global: aggregate top chunks from all docs
+  std::string global_query(const std::string& q, const QueryParam& param)
+  {
+    debug_log("[GraphRAG] global_query top_k=", param.top_k);
+    if (!chunks_vdb)
+      return "Sorry, I'm not able to provide an answer to that question.";
+    auto results = chunks_vdb->query(q, param.top_k * 3); // get more for diversity
+    if (results.empty())
+      return "Sorry, I'm not able to provide an answer to that question.";
+    // Group by doc prefix, take top chunk per doc
+    std::unordered_map<std::string, std::string> doc_top_chunk;
+    for (const auto& r : results) {
+      std::string id = r.at("id");
+      auto dash = id.find('-');
+      std::string doc_prefix = dash != std::string::npos ? id.substr(0, dash+1) : id;
+      if (doc_top_chunk.count(doc_prefix) == 0)
+        doc_top_chunk[doc_prefix] = id;
+      if ((int)doc_top_chunk.size() >= param.top_k)
+        break;
+    }
+    std::vector<std::string> ids;
+    for (const auto& kv : doc_top_chunk)
+      ids.push_back(kv.second);
+    auto chunks = text_chunks->get_by_ids(ids);
+    std::string section;
+    int tokens = 0;
+    for (const auto& optChunk : chunks) {
+      if (!optChunk.has_value()) continue;
+      const auto& c = optChunk.value();
+      tokens += c.tokens;
+      if (tokens > param.naive_max_token_for_text_unit) break;
+      section += c.content + "\n--New Chunk--\n";
+    }
+    if (!section.empty())
+      section.erase(section.size() - std::string("\n--New Chunk--\n").size());
+    debug_log("[GraphRAG] global context tokens=", tokens);
+    if (param.only_need_context)
+      return section;
+    auto sys_prompt = Prompts::naive_rag_response(section, param.response_type);
+    if (!llm_strategy)
+      return section;
+    debug_log("[GraphRAG] calling LLM (global)");
     auto resp = llm_strategy->prompt(q, sys_prompt);
     return resp.empty() ? section : resp;
   }

@@ -20,8 +20,8 @@ enum class EmbeddingStrategyType
 };
 
 /**
- * @brief Factory function to create embedding strategy instances
  *
+  // Hash removed
  * @param type The type of embedding strategy to create
  * @return std::unique_ptr<IEmbeddingStrategy> The created embedding strategy instance
  */
@@ -31,8 +31,6 @@ inline std::unique_ptr<IEmbeddingStrategy> create_embedding_strategy(EmbeddingSt
   {
     case EmbeddingStrategyType::OpenAI:
       return std::make_unique<OpenAIEmbeddingStrategy>();
-    case EmbeddingStrategyType::Hash:
-      return std::make_unique<HashEmbeddingStrategy>();
     // Add more cases here
     default:
       return nullptr;
